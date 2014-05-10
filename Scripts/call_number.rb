@@ -17,12 +17,11 @@ require 'timeout'
 # user: The TK-Suite User
 # pass: The users Password
 
-def dial(nst, num, user, pass)
-  hostname = 'matk.mackit.org'
+def dial(host, nst, num, user, pass)
   port = 5081
   begin Timeout::timeout(3) do
   
-      s = TCPSocket.open(hostname, port)
+      s = TCPSocket.open(host, port)
       s.puts "cti" + user + ":" + pass
       
       sleep 0.5
@@ -51,4 +50,9 @@ def dial(nst, num, user, pass)
 end
 
 
-p dial('44', '015158843463', 'username', 'password')
+# host is the hostname of the tksuite server / lan modul 510
+# 00 is the internal number
+# 0011223344 the number to dial
+# username and password of the tksuite user
+
+p dial('host', '00', '00112233', 'username', 'password')
